@@ -18,6 +18,7 @@
 	
 	<!-- 处理静态资源的请求 -->
 	<mvc:resources location="/resources/" mapping="/resources/*"/>
+	<mvc:resources location="/image/" mapping="/image/*"/>
 	
     <!-- 避免IE执行AJAX时,返回JSON出现下载文件 
     <bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
