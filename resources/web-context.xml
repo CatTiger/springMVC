@@ -12,7 +12,13 @@
     http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
     <!-- 启动扫描team4下所有的controller --> 
-    <context:component-scan base-package="com.team4"/>
+    <context:component-scan base-package="com.team4.platform"/>
+    <!-- 启动扫描base下所有的dao -->
+    <context:component-scan base-package="com.team4.base.core.dao" />
+    
+    <!--
+    <bean id="iBaseModelDao" name="iBaseModelDao" class="com.team4.base.core.dao.impl.BaseModelDaoImpl"></bean>-->
+    
     <mvc:annotation-driven/>
     <mvc:default-servlet-handler/>
 	
