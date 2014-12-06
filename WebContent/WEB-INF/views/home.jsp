@@ -241,14 +241,13 @@
 		</div>
 		<div class="clearfix"></div>
 		<!---//footer--->
+		
 		<!---copy-right--->
 		<div class="copy-right">
 			<div class="container">
 				<p>
 					Copyright &copy; 2014.Company name All rights reserved.<a
-						target="_blank" href="http://www.cssmoban.com/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a>
-					- More Templates <a href="http://www.cssmoban.com/" target="_blank"
-						title="模板之家">模板之家</a>
+						target="_blank" href="">java4th</a>
 				</p>
 				<script type="text/javascript">
 					$(document).ready(function() {

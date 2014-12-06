@@ -1,8 +1,10 @@
 package com.team4.platform.model;
 
+import com.team4.base.core.model.BaseModel;
 
 
-public class ProductTypeMap implements java.io.Serializable {
+
+public class ProductTypeMap extends BaseModel implements java.io.Serializable {
 
 	/**
 	 * 

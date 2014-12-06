@@ -21,6 +21,9 @@
 				scrollTop : $(this.hash).offset().top
 			}, 1000);
 		});
+		$("#login_id").click(function(){
+			$('#myModal').modal("show");
+		})
 	});
 </script>
 <!---- start-smoth-scrolling---->
@@ -65,7 +68,7 @@
 				<div class="top-contact-info">
 					<ul class="unstyled-list list-inline">
 						<li><span class="phone"> </span>090 - 223 44 66</li>
-						<li><span class="mail"> </span><a href="#">help@trendd.com</a></li>
+						<li><span class="mail"> </span><a href="#">gzc1221@qq.com</a></li>
 						<div class="clearfix"></div>
 					</ul>
 				</div>
@@ -80,8 +83,13 @@
 					</div>
 					<div class="login-rigister">
 						<ul class="unstyled-list list-inline">
-							<li><a class="login" href="#">登陆</a></li>
-							<li><a class="rigister" href="#">注册 <span>
+							<li><button class="btn btn-primary btn-lg" data-toggle="modal" id="login_id">登陆</button></li>
+							<li><a class="rigister" href="toUserRegister">注册 <span>
+								</span></a></li>
+							<div class="clearfix"></div>
+						</ul>
+						<ul class="unstyled-list list-inline">
+							<li><a class="rigister" href="toPublishPage">发布商品 <span>
 								</span></a></li>
 							<div class="clearfix"></div>
 						</ul>
@@ -101,7 +109,7 @@
 				<li><a href="products.html">CAMPAINGS</a><span> </span></li>
 				<li><a href="requiredBook">求书专区</a><span> </span></li>
 				<li><a href="products.html">闲置发布</a><span> </span></li>
-				<li><a href="products.html">ABOUT US</a></li>
+				<li><a href="toContactUs">关于我们</a></li>
 				<div class="clearfix"></div>
 			</ul>
 			<a href="#" id="pull"><img src="images/nav-icon.png" title="menu" /></a>
@@ -117,5 +125,6 @@
 			<!---top-header-search-box--->
 			<div class="clearfix"></div>
 		</div>
+		
 	</div>
-	<!--//top-header-nav---->
+	<!--//top-header-nav---->	

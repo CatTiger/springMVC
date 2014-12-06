@@ -30,19 +30,26 @@
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="packagesToScan" value="com.team4.model" />
+		<property name="packagesToScan" value="com.team4.platform.model" />
 		<property name="hibernateProperties">
 			<props>
 				<prop key="dialect">org.hibernate.dialect.HSQLDialect</prop>
+    			<prop key="show_sql">true</prop>
 			</props>
 		</property>
 	</bean>
 	
-	<!-- hibernate管理事务在spring中的声明 -->
+	<!-- hibernate管理事务在spring中的声明 
 	<bean id="transactionManager"
         class="org.springframework.orm.hibernate3.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory" />
+    </bean>-->
+    
+    <!-- 事务管理器配置, Hibernate单数据源事务 -->
+    <bean id="defaultTransactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory" />
     </bean>
     
-	<tx:annotation-driven/>
+    <!-- 使用annotation定义事务 -->
+    <tx:annotation-driven transaction-manager="defaultTransactionManager" proxy-target-class="true" /><tx:annotation-driven/>
 </beans>

@@ -12,9 +12,11 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.team4.base.core.model.BaseModel;
+
 @Entity                        // 表示为实体类
 @Table(name="user_type")       // 表名注解
-public class UserType implements java.io.Serializable {
+public class UserType extends BaseModel implements java.io.Serializable {
 
 	/**
 	 * 

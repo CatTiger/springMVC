@@ -15,9 +15,11 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.team4.base.core.model.BaseModel;
+
 @Entity
 @Table(name = "product_comment")
-public class ProductComment implements java.io.Serializable {
+public class ProductComment extends BaseModel implements java.io.Serializable {
 
 	/**
 	 * 

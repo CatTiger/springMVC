@@ -14,101 +14,70 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
-@Entity                        // 表示为实体类
-@Table(name="base_user")       // 表名注解
-public class BaseUser implements java.io.Serializable {
+import com.team4.base.core.model.BaseModel;
+
+@Entity
+@Table(name = "base_user")
+public class BaseUser extends BaseModel implements java.io.Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	@Id  
-    @Column(name="user_id")  
-	@GeneratedValue(generator = "paymentableGenerator")     
+
+	@Id
+	@Column(name = "user_id")
+	@GeneratedValue(generator = "paymentableGenerator")
 	@GenericGenerator(name = "paymentableGenerator", strategy = "uuid")
 	private String userId;
-	
-	@Column(name="username")
+
+	@Column(name = "username")
 	private String username;
-	
-	@Column(name="pwd")
+
+	@Column(name = "pwd")
 	private String pwd;
-	
-	@Column(name="email")
+
+	@Column(name = "email")
 	private String email;
-	
-	@Column(name="telphone")
+
+	@Column(name = "telphone")
 	private String telphone;
-	
-	@Column(name="contact_name")
+
+	@Column(name = "contact_name")
 	private String contactName;
-	
-	@Column(name="regist_time")
+
+	@Column(name = "regist_time")
 	private Date registTime;
-	
-	@Column(name="contact_address")
+
+	@Column(name = "contact_address")
 	private String contactAddress;
-	
-	@Column(name="user_big_img")
+
+	@Column(name = "user_big_img")
 	private byte[] userBigImg;
-	
-	@Column(name="user_small_img")
+
+	@Column(name = "user_small_img")
 	private byte[] userSmallImg;
-	
-	@Column(name="user_qq")
+
+	@Column(name = "user_qq")
 	private String userQq;
-	
-	@OneToMany(fetch=FetchType.LAZY, mappedBy = "baseUser")
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "baseUser")
 	private Set<UserProductStore> userProductStores = new HashSet<UserProductStore>();
-	
-	@OneToMany(fetch=FetchType.LAZY, mappedBy = "baseUser")
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "baseUser")
 	private Set<UserProduct> userProducts = new HashSet<UserProduct>();
-	
-	@OneToMany(fetch=FetchType.EAGER, mappedBy = "baseUser")
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "baseUser")
 	private Set<UserType> userTypes = new HashSet<UserType>();
-	
-	@OneToMany(fetch=FetchType.LAZY, mappedBy = "baseUser")
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "baseUser")
 	private Set<ProductComment> productComments = new HashSet<ProductComment>();
 
 	public BaseUser() {
 	}
 
-	public BaseUser(String userId, String username, String pwd, String email,
-			String telphone, Date registTime, String contactAddress) {
-		this.userId = userId;
-		this.username = username;
-		this.pwd = pwd;
-		this.email = email;
-		this.telphone = telphone;
-		this.registTime = registTime;
-		this.contactAddress = contactAddress;
-	}
-
-	public BaseUser(String userId, String username, String pwd, String email,
-			String telphone, String contactName, Date registTime,
-			String contactAddress, byte[] userBigImg, byte[] userSmallImg,
-			String userQq, Set userProductStores, Set userProducts,
-			Set userTypes, Set productComments) {
-		this.userId = userId;
-		this.username = username;
-		this.pwd = pwd;
-		this.email = email;
-		this.telphone = telphone;
-		this.contactName = contactName;
-		this.registTime = registTime;
-		this.contactAddress = contactAddress;
-		this.userBigImg = userBigImg;
-		this.userSmallImg = userSmallImg;
-		this.userQq = userQq;
-		this.userProductStores = userProductStores;
-		this.userProducts = userProducts;
-		this.userTypes = userTypes;
-		this.productComments = productComments;
-	}
-
 	public String getUserId() {
-		return this.userId;
+		return userId;
 	}
 
 	public void setUserId(String userId) {
@@ -116,7 +85,7 @@ public class BaseUser implements java.io.Serializable {
 	}
 
 	public String getUsername() {
-		return this.username;
+		return username;
 	}
 
 	public void setUsername(String username) {
@@ -124,7 +93,7 @@ public class BaseUser implements java.io.Serializable {
 	}
 
 	public String getPwd() {
-		return this.pwd;
+		return pwd;
 	}
 
 	public void setPwd(String pwd) {
@@ -132,7 +101,7 @@ public class BaseUser implements java.io.Serializable {
 	}
 
 	public String getEmail() {
-		return this.email;
+		return email;
 	}
 
 	public void setEmail(String email) {
@@ -140,7 +109,7 @@ public class BaseUser implements java.io.Serializable {
 	}
 
 	public String getTelphone() {
-		return this.telphone;
+		return telphone;
 	}
 
 	public void setTelphone(String telphone) {
@@ -148,7 +117,7 @@ public class BaseUser implements java.io.Serializable {
 	}
 
 	public String getContactName() {
-		return this.contactName;
+		return contactName;
 	}
 
 	public void setContactName(String contactName) {
@@ -156,7 +125,7 @@ public class BaseUser implements java.io.Serializable {
 	}
 
 	public Date getRegistTime() {
-		return this.registTime;
+		return registTime;
 	}
 
 	public void setRegistTime(Date registTime) {
@@ -164,7 +133,7 @@ public class BaseUser implements java.io.Serializable {
 	}
 
 	public String getContactAddress() {
-		return this.contactAddress;
+		return contactAddress;
 	}
 
 	public void setContactAddress(String contactAddress) {
@@ -172,7 +141,7 @@ public class BaseUser implements java.io.Serializable {
 	}
 
 	public byte[] getUserBigImg() {
-		return this.userBigImg;
+		return userBigImg;
 	}
 
 	public void setUserBigImg(byte[] userBigImg) {
@@ -180,7 +149,7 @@ public class BaseUser implements java.io.Serializable {
 	}
 
 	public byte[] getUserSmallImg() {
-		return this.userSmallImg;
+		return userSmallImg;
 	}
 
 	public void setUserSmallImg(byte[] userSmallImg) {
@@ -188,42 +157,42 @@ public class BaseUser implements java.io.Serializable {
 	}
 
 	public String getUserQq() {
-		return this.userQq;
+		return userQq;
 	}
 
 	public void setUserQq(String userQq) {
 		this.userQq = userQq;
 	}
 
-	public Set getUserProductStores() {
-		return this.userProductStores;
+	public Set<UserProductStore> getUserProductStores() {
+		return userProductStores;
 	}
 
-	public void setUserProductStores(Set userProductStores) {
+	public void setUserProductStores(Set<UserProductStore> userProductStores) {
 		this.userProductStores = userProductStores;
 	}
 
-	public Set getUserProducts() {
-		return this.userProducts;
+	public Set<UserProduct> getUserProducts() {
+		return userProducts;
 	}
 
-	public void setUserProducts(Set userProducts) {
+	public void setUserProducts(Set<UserProduct> userProducts) {
 		this.userProducts = userProducts;
 	}
 
-	public Set getUserTypes() {
-		return this.userTypes;
+	public Set<UserType> getUserTypes() {
+		return userTypes;
 	}
 
-	public void setUserTypes(Set userTypes) {
+	public void setUserTypes(Set<UserType> userTypes) {
 		this.userTypes = userTypes;
 	}
 
-	public Set getProductComments() {
-		return this.productComments;
+	public Set<ProductComment> getProductComments() {
+		return productComments;
 	}
 
-	public void setProductComments(Set productComments) {
+	public void setProductComments(Set<ProductComment> productComments) {
 		this.productComments = productComments;
 	}
 

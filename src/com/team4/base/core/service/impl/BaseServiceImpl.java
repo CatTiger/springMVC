@@ -7,7 +7,9 @@ import javax.naming.directory.SearchResult;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.team4.base.core.dao.IBaseModelDao;
@@ -17,12 +19,15 @@ import com.team4.base.core.service.IBaseService;
 
 @Service
 @Transactional
+@EnableTransactionManagement
+@ComponentScan(basePackages = "com.team4.base.core.service")
 public class BaseServiceImpl implements IBaseService {
 	
 	@Autowired
 	@Qualifier("iBaseModelDao")
 	private IBaseModelDao iBaseModelDao;
 
+	@Transactional
 	public <T extends BaseModel> T insert(T baseModel) throws AppException {
 		iBaseModelDao.insert(baseModel);
 		return null;
@@ -67,8 +72,7 @@ public class BaseServiceImpl implements IBaseService {
 	}
 
 	public <T extends BaseModel> T searchById(Long id) throws AppException {
-		// TODO Auto-generated method stub
-		return null;
+		return iBaseModelDao.searchById(id);
 	}
 
 	public <T extends BaseModel> List<T> searchByIds(String cls, String ids)
