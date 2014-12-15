@@ -1,9 +1,6 @@
 package com.team4.base.core.service.impl;
 
 import java.util.List;
-import java.util.Map;
-
-import javax.naming.directory.SearchResult;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,13 +13,14 @@ import com.team4.base.core.dao.IBaseModelDao;
 import com.team4.base.core.exception.AppException;
 import com.team4.base.core.model.BaseModel;
 import com.team4.base.core.service.IBaseService;
+import com.team4.base.core.util.Constants;
 
 @Service
 @Transactional
 @EnableTransactionManagement
 @ComponentScan(basePackages = "com.team4.base.core.service")
 public class BaseServiceImpl implements IBaseService {
-	
+
 	@Autowired
 	@Qualifier("iBaseModelDao")
 	private IBaseModelDao iBaseModelDao;
@@ -33,107 +31,57 @@ public class BaseServiceImpl implements IBaseService {
 		return null;
 	}
 
-	public int deleteById(String clsName, Long id) throws AppException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public int deleteById(Long id) throws AppException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public int deleteByIds(String ids) throws AppException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public int deleteByIds(String clsName, String ids) throws AppException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public <T extends BaseModel> int update(T baseModel,
-			Map<String, String> params) throws AppException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public <T extends BaseModel> int update(T baseModel, String ids)
+	@Transactional
+	public <T extends BaseModel> void deleteModel(T baseModel)
 			throws AppException {
-		// TODO Auto-generated method stub
-		return 0;
+		iBaseModelDao.deleteByModel(baseModel);
 	}
 
-	public <T extends BaseModel> T searchById(String clsName, Long id)
+	@Transactional
+	public <T extends BaseModel> void deleteModels(List<T> baseModels)
 			throws AppException {
-		// TODO Auto-generated method stub
-		return null;
+		for (T t : baseModels) {
+			iBaseModelDao.deleteByModel(t);
+		}
 	}
 
-	public <T extends BaseModel> T searchById(Long id) throws AppException {
-		return iBaseModelDao.searchById(id);
+	@Transactional
+	public <T extends BaseModel> void update(T baseModel) throws AppException {
+		iBaseModelDao.update(baseModel);
 	}
 
-	public <T extends BaseModel> List<T> searchByIds(String cls, String ids)
+	@Transactional
+	public <T extends BaseModel> T searchById(String uuid, String clsName)
 			throws AppException {
-		// TODO Auto-generated method stub
-		return null;
+		return iBaseModelDao.searchById(clsName, uuid);
 	}
 
-	public <T extends BaseModel> SearchResult search(T baseModel,
-			int pageIndex, int pageRows) throws AppException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public <T extends BaseModel> SearchResult searchCross(T baseModel,
-			int pageIndex, int pageRows) throws AppException {
-		// TODO Auto-generated method stub
-		return null;
+	@Transactional
+	public <T extends BaseModel> List<T> searchByIds(String ids, String clsName)
+			throws AppException {
+		return iBaseModelDao.searchByIds(clsName, ids);
 	}
 
 	public <T extends BaseModel> Integer count(T baseModel) throws AppException {
-		// TODO Auto-generated method stub
-		return null;
+		return iBaseModelDao.count(baseModel);
 	}
 
-	public <T extends BaseModel> Integer countCross(T baseModel)
+	/**
+	 * get totalPage number
+	 * @param baseModel
+	 * @return
+	 * @throws AppException
+	 */
+	public <T extends BaseModel> Integer getTotalPage(T baseModel) throws AppException {
+		int totalRow = iBaseModelDao.count(baseModel);
+		int totalPage = (int) Math.ceil((double)totalRow / (double)Constants.PAGE_SIZE);
+		return Integer.valueOf(totalPage); 
+	}
+	
+	public <T extends BaseModel> List<T> getPageResult(T baseModel, int pageIndex)
 			throws AppException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public <T extends BaseModel> Integer countByModel(T baseModel)
-			throws AppException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public int validate(String clsName, String ids) throws AppException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public int examine(String clsName, String ids) throws AppException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public int invalidate(String clsName, String ids) throws AppException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public int unexamine(String clsName, String ids) throws AppException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public <T extends BaseModel> Integer countByModelVerificate(T baseModel)
-			throws AppException {
-		// TODO Auto-generated method stub
-		return null;
+		int startIndex = (pageIndex - 1) * Constants.PAGE_SIZE;
+		return iBaseModelDao.search(baseModel, startIndex, Constants.PAGE_SIZE);
 	}
 
 }
