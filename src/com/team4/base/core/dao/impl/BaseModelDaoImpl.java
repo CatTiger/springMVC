@@ -18,12 +18,13 @@ import com.team4.platform.model.BaseUser;
 
 @Repository("iBaseModelDao")
 public class BaseModelDaoImpl implements IBaseModelDao {
-	
+
 	@Autowired
 	protected SessionFactory sessionFactory;
-	
+
 	/**
 	 * to be continue
+	 * 
 	 * @param baseModel
 	 * @return
 	 */
@@ -36,21 +37,21 @@ public class BaseModelDaoImpl implements IBaseModelDao {
 		}
 		return searchStr;
 	}
-	
+
 	private <T extends BaseModel> String getModelName(T baseModel) {
 		String fullName = baseModel.getClass().getName();
 		return fullName.substring(fullName.lastIndexOf("."), fullName.length());
 	}
-	
+
 	public <T extends BaseModel> void insert(T baseModel) throws AppException {
 		sessionFactory.getCurrentSession().save(baseModel);
 	}
-	
+
 	public <T extends BaseModel> void deleteByModel(T baseModel)
 			throws AppException {
 		sessionFactory.getCurrentSession().delete(baseModel);
 	}
-	
+
 	public <T extends BaseModel> Integer count(T baseModel) throws AppException {
 		Session session = sessionFactory.getCurrentSession();
 		String hql = "from " + getModelName(baseModel);
@@ -65,8 +66,8 @@ public class BaseModelDaoImpl implements IBaseModelDao {
 		return session.createQuery(hql).list();
 	}
 
-	public <T extends BaseModel> List<T> search(T baseModel, Integer startIndex,
-			Integer pageRows) throws AppException {
+	public <T extends BaseModel> List<T> search(T baseModel,
+			Integer startIndex, Integer pageRows) throws AppException {
 		Session session = sessionFactory.getCurrentSession();
 		Query q = session.createQuery("from " + getModelName(baseModel));
 		q.setFirstResult(startIndex);
@@ -78,23 +79,16 @@ public class BaseModelDaoImpl implements IBaseModelDao {
 		sessionFactory.getCurrentSession().update(baseModel);
 	}
 
-	public <T extends BaseModel> T searchById(String clsName, String id)
+	public <T extends BaseModel> T searchById(String id, T baseModel)
 			throws AppException {
 		Session session = sessionFactory.getCurrentSession();
-		BaseModel baseModel = null;
-		try {
-			baseModel = (BaseModel) session.get(Class.forName(clsName), id);
-		} catch (HibernateException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		return (T) baseModel;
+		BaseModel model = (BaseModel) session.get(baseModel.getClass(), id);
+		return (T) model;
 	}
 
-	
 	/**
 	 * to be continue
+	 * 
 	 * @param baseModel
 	 * @return
 	 */
@@ -104,10 +98,5 @@ public class BaseModelDaoImpl implements IBaseModelDao {
 		session.createQuery("from " + clsName + "where id in" + ids).list();
 		return null;
 	}
-
-
-
-	
-
 
 }

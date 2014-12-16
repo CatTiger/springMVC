@@ -26,9 +26,7 @@ public interface IBaseModelDao {
 	
 	public <T extends BaseModel> void update(T baseModel) throws AppException;
 	
-	public <T extends BaseModel> T searchById(String clsName,String id) throws AppException;
-	
-	public <T extends BaseModel> List<T> searchByIds(String clsName,String ids) throws AppException;
+	public <T extends BaseModel> T searchById(String id, T baseModel) throws AppException;
 	
 	public <T extends BaseModel> Integer count(T baseModel) throws AppException;
 	
