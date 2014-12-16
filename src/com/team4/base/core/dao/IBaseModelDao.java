@@ -20,44 +20,21 @@ public interface IBaseModelDao {
 	 * @return
 	 * @throws AppException
 	 */
+	public <T extends BaseModel> void insert(T baseModel) throws AppException;
+	
+	public <T extends BaseModel> void deleteByModel(T baseModel) throws AppException;
+	
+	public <T extends BaseModel> void update(T baseModel) throws AppException;
+	
+	public <T extends BaseModel> T searchById(String clsName,String id) throws AppException;
+	
+	public <T extends BaseModel> List<T> searchByIds(String clsName,String ids) throws AppException;
+	
 	public <T extends BaseModel> Integer count(T baseModel) throws AppException;
 	
-	public <T extends BaseModel> Integer countCross(T baseModel) throws AppException;
-
-	public <T extends BaseModel> Integer countByModel(T baseModel) throws AppException;
-
-	public <T extends BaseModel> List<T> search(T baseModel, Integer pageIndex, Integer pageRows) throws AppException;
-
-	public <T extends BaseModel> List<T> searchCross(T baseModel, Integer pageIndex, Integer pageRows) throws AppException;
+	public <T extends BaseModel> List<T> search(T baseModel, Integer startIndex, Integer pageRows) throws AppException;
 
 	public <T extends BaseModel> List<T> search(T baseModel) throws AppException;
 
-	public <T extends BaseModel> T searchById(Long id) throws AppException;
-
-	public <T extends BaseModel> List<T> searchByIds(String clsName,String ids) throws AppException;
-
-	public <T extends BaseModel> int update(T baseModel) throws AppException;
-
-	public <T extends BaseModel> int update(T baseModel, String ids) throws AppException;
-
-	public <T extends BaseModel> int deleteById(Long id) throws AppException;
-
-	public <T extends BaseModel> int deleteByIds(String ids) throws AppException;
-
-	public <T extends BaseModel> void insert(T baseModel) throws AppException;
-
-	public int validate(String ids) throws AppException;
-
-	public int validate(String cls, String ids) throws AppException;
-
-	public int examine(String cls, String ids) throws AppException;
-
-	public int unexamine(String cls, String ids) throws AppException;
-
-	public int invalidate(String ids) throws AppException;
-
-	public int invalidate(String cls, String ids) throws AppException;
-
-	public <T extends BaseModel> Integer countByModelVerificate(T baseModel) throws AppException;
 
 }

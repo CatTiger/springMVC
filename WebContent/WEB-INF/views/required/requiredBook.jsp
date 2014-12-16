@@ -46,7 +46,7 @@
 						<h4>
 							<a href="single-page.html">Minimus Zero </a>
 						</h4>
-						<a class="product-btn" href="single-page.html"><span>109.90$</span><small>GET
+						<a class="product-btn" href="single-page.html"><span>19.90$</span><small>GET
 								NOW</small><label> </label></a>
 					</div>
 					<div class="col-md-3 special-products-grid text-center">

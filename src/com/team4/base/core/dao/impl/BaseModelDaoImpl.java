@@ -1,8 +1,10 @@
 package com.team4.base.core.dao.impl;
 
 import java.io.Serializable;
+import java.lang.reflect.Field;
 import java.util.List;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
@@ -20,119 +22,92 @@ public class BaseModelDaoImpl implements IBaseModelDao {
 	@Autowired
 	protected SessionFactory sessionFactory;
 	
+	/**
+	 * to be continue
+	 * @param baseModel
+	 * @return
+	 */
+	public <T extends BaseModel> String getSearchStr(T baseModel) {
+		String searchStr = "";
+		Class<? extends BaseModel> cls = baseModel.getClass();
+		Field[] fields = cls.getFields();
+		for (Field field : fields) {
+			field.getName();
+		}
+		return searchStr;
+	}
+	
+	private <T extends BaseModel> String getModelName(T baseModel) {
+		String fullName = baseModel.getClass().getName();
+		return fullName.substring(fullName.lastIndexOf("."), fullName.length());
+	}
+	
+	public <T extends BaseModel> void insert(T baseModel) throws AppException {
+		sessionFactory.getCurrentSession().save(baseModel);
+	}
+	
+	public <T extends BaseModel> void deleteByModel(T baseModel)
+			throws AppException {
+		sessionFactory.getCurrentSession().delete(baseModel);
+	}
+	
 	public <T extends BaseModel> Integer count(T baseModel) throws AppException {
 		Session session = sessionFactory.getCurrentSession();
-		session.save(baseModel);
-		return null;
-	}
-
-	public <T extends BaseModel> Integer countCross(T baseModel)
-			throws AppException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public <T extends BaseModel> Integer countByModel(T baseModel)
-			throws AppException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public <T extends BaseModel> List<T> search(T baseModel, Integer pageIndex,
-			Integer pageRows) throws AppException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public <T extends BaseModel> List<T> searchCross(T baseModel,
-			Integer pageIndex, Integer pageRows) throws AppException {
-		// TODO Auto-generated method stub
-		return null;
+		String hql = "from " + getModelName(baseModel);
+		Integer count = (Integer) session.createQuery(hql).iterate().next();
+		return count;
 	}
 
 	public <T extends BaseModel> List<T> search(T baseModel)
 			throws AppException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public <T extends BaseModel> T searchById(Long id) throws AppException {
-		// TODO Auto-generated method stub
 		Session session = sessionFactory.getCurrentSession();
-		Query query=session.createQuery("from BaseUser ");
-		List<BaseUser> lists = query.list();
-		return null;
+		String hql = "from " + getModelName(baseModel);
+		return session.createQuery(hql).list();
 	}
 
+	public <T extends BaseModel> List<T> search(T baseModel, Integer startIndex,
+			Integer pageRows) throws AppException {
+		Session session = sessionFactory.getCurrentSession();
+		Query q = session.createQuery("from " + getModelName(baseModel));
+		q.setFirstResult(startIndex);
+		q.setMaxResults(pageRows);
+		return q.list();
+	}
+
+	public <T extends BaseModel> void update(T baseModel) throws AppException {
+		sessionFactory.getCurrentSession().update(baseModel);
+	}
+
+	public <T extends BaseModel> T searchById(String clsName, String id)
+			throws AppException {
+		Session session = sessionFactory.getCurrentSession();
+		BaseModel baseModel = null;
+		try {
+			baseModel = (BaseModel) session.get(Class.forName(clsName), id);
+		} catch (HibernateException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return (T) baseModel;
+	}
+
+	
+	/**
+	 * to be continue
+	 * @param baseModel
+	 * @return
+	 */
 	public <T extends BaseModel> List<T> searchByIds(String clsName, String ids)
 			throws AppException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public <T extends BaseModel> int update(T baseModel) throws AppException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public <T extends BaseModel> int update(T baseModel, String ids)
-			throws AppException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public <T extends BaseModel> int deleteById(Long id) throws AppException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public <T extends BaseModel> int deleteByIds(String ids)
-			throws AppException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public <T extends BaseModel> void insert(T baseModel)
-			throws AppException {
 		Session session = sessionFactory.getCurrentSession();
-		Serializable s = session.save(baseModel);
-		System.out.println(s);
-	}
-
-	public int validate(String ids) throws AppException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public int validate(String cls, String ids) throws AppException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public int examine(String cls, String ids) throws AppException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public int unexamine(String cls, String ids) throws AppException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public int invalidate(String ids) throws AppException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public int invalidate(String cls, String ids) throws AppException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public <T extends BaseModel> Integer countByModelVerificate(T baseModel)
-			throws AppException {
-		// TODO Auto-generated method stub
+		session.createQuery("from " + clsName + "where id in" + ids).list();
 		return null;
 	}
+
+
+
+	
+
 
 }
