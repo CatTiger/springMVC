@@ -1,5 +1,6 @@
 package com.team4.base.core.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ import com.team4.base.core.model.BaseModel;
 import com.team4.base.core.service.IBaseService;
 import com.team4.base.core.util.Constants;
 
-@Service
+@Service("iBaseService")
 @Transactional
 @EnableTransactionManagement
 @ComponentScan(basePackages = "com.team4.base.core.service")
@@ -51,15 +52,19 @@ public class BaseServiceImpl implements IBaseService {
 	}
 
 	@Transactional
-	public <T extends BaseModel> T searchById(String uuid, String clsName)
+	public <T extends BaseModel> T searchById(String uuid, T baseModel)
 			throws AppException {
-		return iBaseModelDao.searchById(clsName, uuid);
+		return iBaseModelDao.searchById(uuid, baseModel);
 	}
 
 	@Transactional
-	public <T extends BaseModel> List<T> searchByIds(String ids, String clsName)
+	public <T extends BaseModel> List<T> searchByIds(List<String> ids, T baseModel)
 			throws AppException {
-		return iBaseModelDao.searchByIds(clsName, ids);
+		List<BaseModel> lists = new ArrayList<BaseModel>();
+		for (String id : ids) {
+			lists.add(iBaseModelDao.searchById(id, baseModel));
+		}
+		return (List<T>) lists;
 	}
 
 	public <T extends BaseModel> Integer count(T baseModel) throws AppException {

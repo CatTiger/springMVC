@@ -24,11 +24,18 @@ public interface IBaseService {
 
 	public <T extends BaseModel> void update(T baseModel) throws AppException;
 
-	public <T extends BaseModel> T searchById(String uuid, String clsName) throws AppException;
-
-	public <T extends BaseModel> List<T> searchByIds(String cls, String ids)
+	public <T extends BaseModel> T searchById(String uuid, T baseModel)
 			throws AppException;
 
+	public <T extends BaseModel> List<T> searchByIds(List<String> ids,
+			T baseModel) throws AppException;
+
 	public <T extends BaseModel> Integer count(T baseModel) throws AppException;
+
+	public <T extends BaseModel> Integer getTotalPage(T baseModel)
+			throws AppException;
+
+	public <T extends BaseModel> List<T> getPageResult(T baseModel,
+			int pageIndex) throws AppException;
 
 }
