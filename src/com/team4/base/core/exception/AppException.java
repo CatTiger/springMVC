@@ -1,9 +1,9 @@
 package com.team4.base.core.exception;
 
 /**
- * ×Ô¶¨ÒåÒì³£Àà
+ * å¼‚å¸¸ç±»
  * @author {guozichen}
- * 2014Äê11ÔÂ3ÈÕ
+ * 2014å¹´11æœˆ3æ—¥
  */
 public class AppException extends Exception{
 

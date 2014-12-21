@@ -6,20 +6,13 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.team4.base.core.service.impl.BaseServiceImpl;
-import com.team4.platform.dao.IUserDao;
+import com.team4.platform.dao.impl.BaseUserDaoImpl;
 import com.team4.platform.service.ILoginService;
 
 @Service("iLoginService")
 @Transactional
 @EnableTransactionManagement
 public class LoginServiceImpl extends BaseServiceImpl implements ILoginService {
-	
-	@Autowired
-	private IUserDao iUserDao;
-	
-	
-	
-	
 	
 	
 

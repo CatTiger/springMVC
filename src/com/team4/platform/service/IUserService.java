@@ -3,10 +3,11 @@ package com.team4.platform.service;
 import com.team4.base.core.service.IBaseService;
 
 /**
- * ÓÃ»§×¢²áÓëµÇÂ½
+ * ï¿½Ã»ï¿½×¢ï¿½ï¿½ï¿½ï¿½ï¿½Â½
  * @author {guozichen}
- * 2014Äê11ÔÂ27ÈÕ
+ * 2014ï¿½ï¿½11ï¿½ï¿½27ï¿½ï¿½
  */
 public interface IUserService extends IBaseService {
 
+	public boolean isExist(String username);
 }
