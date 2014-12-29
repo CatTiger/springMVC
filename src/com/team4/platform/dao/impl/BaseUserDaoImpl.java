@@ -18,4 +18,5 @@ public class BaseUserDaoImpl extends BaseModelDaoImpl implements IBaseUserDao {
 		Query q = session.createQuery(FIND_BY_USERNAME).setString(0, username);
 		return (com.team4.platform.model.BaseUser)q.uniqueResult();
 	}
+	
 }

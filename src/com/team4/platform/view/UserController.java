@@ -43,7 +43,8 @@ public class UserController {
 	
 	/**
 	 * 注册用户
-	 * @param user session
+	 * @param user 
+	 * @param session
 	 * @return
 	 * @throws AppException
 	 * @throws JSONException 
@@ -60,8 +61,8 @@ public class UserController {
 		user.setRegistTime(new Date());
 		userService.insert(user);
 		session.setAttribute("loginUser", user);
-		System.out.println(session.getAttribute("loginUser"));
-		return session.getAttribute("loginUser");
+		System.out.println(((BaseUser)session.getAttribute("loginUser")).getUsername());
+		return user;
 	}
 	
 	/**
@@ -72,16 +73,55 @@ public class UserController {
 	
 	@RequestMapping(value="/checkname",method = RequestMethod.POST)
 	public @ResponseBody String checkName(@RequestBody String username) {
-		System.out.println(username);
-		if(userService.isExist(username)) {
-			return "exist";
-		}		
-		return "noExist";
+		return userService.getUserByUserName(username) == null ?  "notExist": "exist" ;
 	}
 	
-	
+	/**
+	 * 用户登录
+	 * @param login_Info
+	 * @param session
+	 * @return
+	 * @throws JSONException
+	 */
 	@RequestMapping(value="/userLogin",method = RequestMethod.POST)
-	public @ResponseBody String userLogin() {
-		return null;
+	public @ResponseBody ModelMap userLogin(@RequestBody String login_Info,HttpSession session) throws JSONException {
+		JSONObject json = new JSONObject(login_Info);
+		ModelMap mm = new ModelMap();
+		BaseUser user = userService.getUserByUserName(json.getString("username"));
+		if(user == null) {
+			mm.addAttribute("msg", "userNotExist");
+			System.out.println("不存在用户名");					
+		}else if(!user.getPwd().equals(json.getString("pwd"))) {
+			mm.addAttribute("msg", "NotMatch");
+			System.out.println("密码不正确");
+		}else {
+			session.setAttribute("loginUser", user);
+			mm.addAttribute("msg", "success");
+			mm.addAttribute("loginUser", user);
+			System.out.println("登录成功");
+		}
+		System.out.println(mm);	
+		return mm;
+		
+	}
+	
+	/**
+	 * 用户退出
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value="/userLogout",method=RequestMethod.GET)
+	public @ResponseBody String userLogout(HttpSession session) {
+		System.out.println("退出之前：" + session.getAttribute("loginUser"));
+		session.removeAttribute("loginUser");
+		System.out.println("退出之后：" + session.getAttribute("loginUser"));
+		return "success";
+	}
+	
+	@RequestMapping(value="/userInfo")
+	public String userInfo(HttpSession session) {
+		System.out.println("跳转");
+		System.out.println(session.getAttribute("loginUser"));
+		return "user/userInfo";
 	}
 }

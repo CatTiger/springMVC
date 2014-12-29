@@ -6,6 +6,7 @@
 		<meta charset="utf-8">
 		<title>Home</title>
 		<link href="resources/css/bootstrap.css" rel='stylesheet' type='text/css' />
+		<link rel="stylesheet" href="resources/css/font-awesome.min.css">
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<script src="resources/js/jquery.min.js"></script>
 		 <!-- Custom Theme files -->
@@ -30,8 +31,7 @@
 		</script>
 	</head>
 	<body>
-		
-		
+
 		<!----container-->
 		<div class="container top_container remodal-bg">
 			<!----top-header---->
@@ -51,14 +51,20 @@
 							</ul>
 						</div> -->
 						<div class="login-rigister">
-							<ul class="unstyled-list list-inline">
+							<ul id="reg_log_btn" class="unstyled-list list-inline">
 								<!-- <li><a class="login" href="#">Login</a></li> -->
 								<li><a class="rigister" href="#modal"><span>发布商品</span></a></li>
 								<div class="clearfix"> </div>
 							</ul>
-							<ul>
-								<li id="login_info" style="display:none">${loginUser.username}</li>
-							</ul>
+							<div id="login_info" style="display:none">
+								<img src="" alt="">
+								<div>欢迎：<span></span></div>
+								<ul>
+									<li><a href="user/userInfo"><i class="icon-user icon-large"></i></a></li>
+									<li><a href=""><i class="icon-star icon-large"></i></a></li>
+									<li><a id="logout" href="user/userLogout"><i class="icon-remove icon-large"></i></a></li>
+								</ul>
+							</div>
 						</div>
 						<div class="clearfix"> </div>
 					</div>
@@ -131,7 +137,7 @@
 			</div>
 		</div>
 			<!--nav结束-->
-			<script src="resources/js/responsiveslides.min.js"></script>
+			<!-- <script src="resources/js/responsiveslides.min.js"></script>
 			 <script>
 			    // You can also use "$(window).load(function() {"
 			    $(function () {
@@ -152,48 +158,12 @@
 			      });
 			
 			    });
-			  </script>
-			<!-- Slideshow 4 -->
-			   <!--  <div  id="top" class="callbacks_container">
-			      <ul class="rslides" id="slider4">
-			        <li>
-			          <img src="images/slide1.png" alt="">
-			          <div class="caption">
-			          	<div class="slide-text-info">
-			          		<h1>WILL HELM</h1>
-			          		<label>WINTER</label>
-			          		<a class="slide-btn" href="#"><span>99.90$</span> <small>GET NOW</small><label> </label></a>
-			          	</div>
-			          </div>
-			        </li>
-			        <li>
-			          <img src="images/slide2.png" alt="">
-			          <div class="caption">
-			          	<div class="slide-text-info">
-			          		<h1>FAST NER2</h1>
-			          		<label>Dress Shoe</label>
-			          		<a class="slide-btn" href="#"><span>99.90$</span> <small>GET NOW</small><label> </label></a>
-			          	</div>
-			          </div>
-			        </li>
-			        <li>
-			          <img src="images/slide1.png" alt="">
-			           <div class="caption">
-			           	<div class="slide-text-info">
-			          		<h1>WILL HELM</h1>
-			          		<label>WINTER</label>
-			          		<a class="slide-btn" href="#"><span>99.90$</span> <small>GET NOW</small><label> </label></a>
-			          	</div>
-			          </div>
-			        </li>
-			      </ul>
-			    </div> -->
-			    <!-- <div class="clearfix"> </div> -->
-			<!-- --- //End-slider-- -->
+			  </script> -->
 			<!--主展示页面-->
-			<div class="fill_black" style="display:none"></div>
+			<!-- <div class="fill_black" style="display:none"></div> -->
 				<div class="content">
 					<div class="container">
+						<!-- 商品展示 -->
 						<div class="special-products">
 							<!-- 列表标题 -->
 							<div class="s-products-head">
@@ -260,6 +230,7 @@
 							</div>
 							<!-- 商品列表end -->
 						</div>
+						<!-- 商品展示end -->
 						<!-- 页码 -->
 						<div class="pageing">
 							<a href="" class="page_arrow_left">上一页</a>
@@ -300,21 +271,21 @@
 		<!----container---->
 		<div class="remodal" data-remodal-id="modal">
 		   <div id="form_wrapper" class="form_wrapper">
-		   		<form class="login active">
+		   		<form id="login" class="login active">
 						<h3>登录</h3>
 						<div>
 							<label>用户名:</label>
-							<input type="text" />
-							<span class="error">输入有误哦！</span>
+							<input type="text" name="username" />
+							<span id="username_error" class="error">用户名不存在！</span>
 						</div>
 						<div>
 							<label>密码: <!-- <a href="forgot_password.html" rel="forgot_password" class="forgot linkform">Forgot your password?</a> --></label>
-							<input type="password" />
-							<span class="error">输入有误哦！</span>
+							<input type="password" name="pwd" />
+							<span id="pwd_error" class="error">密码不正确！</span>
 						</div>
 						<div class="bottom">
-							<div class="remember"><input type="checkbox" /><span>记住我</span></div>
-							<input type="submit" value="Login"></input>
+							<!-- <div class="remember"><input type="checkbox" /><span>记住我</span></div> -->
+							<input type="submit" class="remodal-login" value="登录"></input>
 							<a href="register.html" rel="register" class="linkform">还没有账号吗？加入我们吧!</a>
 							<div class="clear"></div>
 						</div>
@@ -352,7 +323,7 @@
 							</div>
 						</div>
 						<div class="bottom">
-							<input type="submit" class="remodal-register" value="确定加入" />
+							<input type="submit" class="remodal-register" value="加入我们" />
 							<a href="index.html" rel="login" class="linkform">您已经有账号了吗？点击这里</a>
 							<div class="clear"></div>
 						</div>
@@ -381,28 +352,28 @@
 				   });
 				   return o;
 				};
-			$('#register').on('submit', function(event) {
-				event.preventDefault();
-				submit_ajax();
-			});
-			function submit_ajax() {
+			// $('#register').on('submit', function(event) {
+			// 	event.preventDefault();
+			// 	submit_ajax();
+			// });
+			//function submit_ajax() {
 				//var param = {};
-				$.ajax({
-					url: 'user/userRegister',
-					type: 'post',
-					dataType:'json',
-					contentType:'application/json;charset=UTF-8',
-					data: JSON.stringify($('#register').serializeObject()),
-					success: function(data, textStatus, xhr) {
-							console.log(data);
-							$('#login_info').fadeIn("slow");
-						}
-					});
-					
-			}
+				// $.ajax({
+				// 	url: 'user/userRegister',
+				// 	type: 'post',
+				// 	dataType:'json',
+				// 	contentType:'application/json;charset=UTF-8',
+				// 	data: JSON.stringify($('#register').serializeObject()),
+				// 	success: function(data, textStatus, xhr) {
+				// 			console.log(data);
+				// 			$('#login_info').css('display', 'block');;
+				// 			$('#reg_log_btn').css('display', 'none');
+				// 		}
+				// 	});
+			//}
+			/*验证用户名是否存在*/
 			$('#username').on('blur', function(event) {
 				event.preventDefault();
-				//console.log( JSON.stringify($('#username').serializeObject()));
 				check_name();
 			});
 
@@ -414,7 +385,7 @@
 					contentType:'text/plain;charset=UTF-8',
 					data:  $('#username').val(),
 					success: function(data) {
-						if(data == 'noExist'){
+						if(data == 'notExist'){
 							console.log("用户名可以注册！");
 						}
 						else {
@@ -427,6 +398,44 @@
 					}
 				});
 			}
+
+			// 用户退出
+			$('#logout').on('click', function(event) {
+				event.preventDefault();
+				$.ajax({
+					url: 'user/userLogout',
+					type: 'GET',
+					dataType: 'text',
+					contentType:'text/plain;charset=UTF-8',
+					// data: {param1: 'value1'},
+					success: function(data) {
+						if(data == 'success') {
+							$('#reg_log_btn').css('display', 'block');
+							$('#login_info').css('display', 'none');
+						}
+					}
+				});
+			});
+
+			// 用户登录
+			// $('#login').on('submit', function(event) {
+			// 	event.preventDefault();
+			// 	login_ajax();
+			// });
+
+			// function login_ajax() {
+			// 	$.ajax({
+			// 		url: 'user/userLogin',
+			// 		type: 'POST',
+			// 		dataType: 'json',
+			// 		contentType:'application/json;charset=UTF-8',
+			// 		data: JSON.stringify($('#login').serializeObject()),
+			// 		success: function(data, textStatus, xhr) {
+			// 			console.log(data);
+			// 			remodal.prototype.close();
+			// 		}
+			// 	})
+			// }
 		});
 		</script>
 		<!-- 注册登录弹出框jquery代码 -->

@@ -41,7 +41,7 @@
     </bean>
     
     <!-- 配置HttpMessageConverter 3.2好像默认配置7种 -->
-	<bean
+	<!-- <bean
 		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
 		<property name='messageConverters' ref="messageConverters"/>
 		
@@ -52,7 +52,7 @@
 		<bean class="org.springframework.http.converter.StringHttpMessageConverter"/>
 		<bean class="org.springframework.http.converter.xml.XmlAwareFormHttpMessageConverter"/>
 		<ref bean="mappingJacksonHttpMessageConverter"/>
-	</util:list> 
+	</util:list>  -->
 	
 	<bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
 		<property name="supportedMediaTypes">    

@@ -1,6 +1,5 @@
 eclipse.preferences.version=1
 encoding//WebContent/WEB-INF/views/home.jsp=UTF-8
 encoding//WebContent/WEB-INF/views/required/requiredBook.jsp=UTF-8
-encoding//WebContent/WEB-INF/views/user/userRegister.jsp=UTF-8
 encoding//src/com/team4/base/core/dao/IBaseModelDao.java=UTF-8
 encoding//src/com/team4/base/core/dao/impl/BaseModelDaoImpl.java=UTF-8

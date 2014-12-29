@@ -6,9 +6,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+
 import com.team4.base.core.service.impl.BaseServiceImpl;
 import com.team4.platform.dao.IBaseUserDao;
-
+import com.team4.platform.model.BaseUser;
 import com.team4.platform.service.IUserService;
 
 @Service("iUserService")
@@ -20,10 +21,14 @@ public class UserServiceImpl extends BaseServiceImpl implements IUserService {
 	private IBaseUserDao userDao;
 	
 	public boolean isExist(String username) {
-		if(userDao.findByUsername(username) == null)
-			return false;
-		else 
-			return true;
+		return userDao.findByUsername(username) == null ? false :true; 
 	}
+
+	public BaseUser getUserByUserName(String username) {
+		// TODO Auto-generated method stub
+		return userDao.findByUsername(username);
+	}
+
+	
 }
  

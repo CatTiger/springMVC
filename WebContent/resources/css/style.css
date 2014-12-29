@@ -1,12 +1,14 @@
 /*导入登录注册CSS*/
 /*
-主题色 #e71f25
+主题色 #e71f25  红色
+互补色 #21BD19	绿色
+辅助色 #E9A31F  橙黄色
 */
 @import "style1.css";
 html, body{
-  	font-family: "微软雅黑","HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  	font-family: "微软雅黑", Helvetica, Arial, sans-serif,"HelveticaNeue", "Helvetica Neue";
     font-size: 100%;
-  	 background: #F0F0F0;
+  	background: #F0F0F0;
 }
 body a{
 	transition:0.5s all;
@@ -94,7 +96,7 @@ ul.cart-sub{
 ul.cart-sub li p{
 	color:#EF3626;
 }*/
-.login-rigister li a.login{
+/* .login-rigister li a.login{
 	color: #444444;
 	font-weight: 600;
 	text-transform: uppercase;
@@ -104,7 +106,7 @@ ul.cart-sub li p{
 .login-rigister li a.login:hover{
 	color:#EF3626;
 	text-decoration:none;
-}
+} */
 .login-rigister li a.rigister{
 	background:#F03627;
 	color:#FFF;
@@ -142,6 +144,9 @@ a.rigister span{
 	-moz-border-radius:0.5em;
 	-o-border-radius:0.5em;
 	-ms-border-radius:0.5em;
+}
+.login_info a:before {
+	content:"\f0f0";
 }
 /*.top-contact-info ul li a:hover{
 	text-decoration:none;
@@ -394,6 +399,7 @@ nav a:hover{
 	-webkit-appearance: none;
 	cursor: pointer;
 	margin-left: 0.2em;
+	border-radius:
 }
 /*--//top-header---*/
 /*----slider----*/

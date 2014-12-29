@@ -54,7 +54,6 @@
  	 	this.$menu = $(elementId||'#top_menu');
  	 	this.top_menu = $(elementId||'#top_menu').get(0);
  	 	this.$menu_list_a = $('#menu_list').find('a');
- 	 	console.log(this.$menu_list_a);
  	 	// 获取菜单内容
  	 	this.$menu_con = $('#menu_con');
  	 	this.$menu_show = $('#menu_con').children('.menu_show');
@@ -71,17 +70,6 @@
  	 	this.$menu.on('mouseleave', function(event) {
  	 		$(_this.$menu_con.children('.menu_show')).removeClass('menu_show');
  	 	});
- 	 	/*this.$menu_list_a.each(function(index, el) {
- 	 		$(el).on('mouseenter', function(event) {
- 	 			// _this.sel_index = $(event.target).parent().index();
-	 	 		// _this.$menu_list_a.css('border-bottem','2px solid #fefefe');
-	 	 		$(event.target).css('border-bottom', '2px solid red');
-	 	 		_this.switchTab(index);
- 	 		});
- 	 		$(el).on('mouseleave', function(event) {
- 				$(event.target).css('border-bottom', '2px solid #fefefe')
- 	 		});
- 	 	});*/
 
  	 	Menu.prototype.switchTab = function(argument){
  	 		$(this.$menu_con.children('.menu_show')).removeClass('menu_show');

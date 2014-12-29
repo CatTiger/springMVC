@@ -1,0 +1,107 @@
+@charset "UTF-8";
+/**
+ * 
+ * @authors chenzhq
+ * @date    2014-12-29 15:32:43
+ * @version 1.0
+ */
+#info_nav {
+    background-color: #fff;
+    border-radius: 1em;
+}
+#user_phote {
+    border-radius: 60px;
+    cursor: pointer;
+    height: 120px;
+    margin: 1em;
+    width: 120px;
+}
+#menu_nav {
+    display: inline-flex;
+    list-style: outside none none;
+    width: 47em;
+}
+#menu_nav>li {
+	text-align: center;
+	flex: 1 1 0;
+}
+#menu_nav a {
+    border: 1px solid #e9a31f;
+    border-radius: 7px;
+    padding: 1em;
+}
+
+
+#user_info {
+
+}
+
+#my_info {
+	background-color: #fff;
+	margin-bottom: 3em;
+}
+#account_info {
+    margin-top: 2em;
+    padding: 2em;
+}
+#user_info h2 {
+    border-bottom: 1px solid #e9a31f;
+    margin: 0 18em 0 2em;
+    padding: 0 5em 0.6em 1em;
+}
+.infos {
+	list-style: outside none none;
+    margin: 1em 0 0 5em;
+}
+#base_info {
+	margin-top: 2em;
+    padding: 2em;
+}
+
+#my_book {
+    margin: 2em 0;
+}
+.book_list {
+    list-style: outside none none;
+}
+.book_list li {
+    display: flex;
+    margin: 1em 0 2em 2em;
+    background-color: #fff;
+    position: relative;
+}
+.book_one {
+    order: 2;
+}
+.book_state {
+    bottom: 0.5em;
+    left: 9em;
+    position: absolute;
+}
+.change_state {
+    bottom: 0.5em;
+    position: absolute;
+    right: 1.2em;
+}
+.book_pic {
+    height: 130px;
+    order: 1;
+    width: 130px;
+    padding: 0.4em;
+    cursor: pointer;
+}
+
+#my_store {
+    margin: 2em 0;
+}
+.book_one h3 {
+    font-size: 1.3em;
+    margin: 0 0.5em;
+}
+.book_one a {
+    color: #e9a31f;
+}
+.book_one > p {
+    margin: 0.5em;
+    padding: 0.5em;
+}
