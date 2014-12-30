@@ -9,7 +9,6 @@
 		this.$nav = $('#menu_nav');
 		this.$content = $('#user_info');
 		this.$nav_a = $('#menu_nav').find('a');
-		console.log(this.$nav_a);
 		var _this = this;
 		this.$nav_a.on('click', function(event) {
 			event.preventDefault();

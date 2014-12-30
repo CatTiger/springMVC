@@ -122,7 +122,7 @@ body.remodal_active .remodal-overlay {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    padding: 35px;
+    padding: 0;
 
     -webkit-transition: -webkit-transform 0.2s linear;
     -moz-transition: -moz-transform 0.2s linear;
@@ -172,15 +172,15 @@ body.remodal_active .remodal {
     transition: background 0.2s linear;
     text-decoration: none;
 
-    border: 2px solid #3e5368;
+    border: 2px solid #e9a31f;
     -webkit-border-radius: 50%;
     border-radius: 50%;
 }
 
 .remodal-close:after {
     font-family: Arial, "Helvetica CY", "Nimbus Sans L", sans-serif !important;
-    font-size: 28px;
-    line-height: 28px;
+    font-size: 29px;
+    line-height: 24px;
 
     display: block;
 
@@ -192,12 +192,13 @@ body.remodal_active .remodal {
     transition: all 0.2s linear;
     text-decoration: none;
 
-    color: #3e5368;
+    color: #e9a31f;
 }
 
 .remodal-close:hover,
 .remodal-close:active {
-    background: #3e5368;
+    background: #e9a31f;
+    text-decoration: none;
 }
 
 .remodal-close:hover.remodal-close:after,

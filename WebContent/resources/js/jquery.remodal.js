@@ -170,7 +170,7 @@
         remodal.$body.append(remodal.$overlay);
         remodal.$confirmButton = remodal.$modal.find("." + pluginName + "-confirm");
         remodal.$cancelButton = remodal.$modal.find("." + pluginName + "-cancel");
-        // 自己加入的提交按钮
+        // 自己加入的注册按钮
         remodal.$submitButton = remodal.$modal.find("." + pluginName + "-register");
         // 自己加入的登录按钮
         remodal.$loginButton = remodal.$modal.find("." + pluginName + "-login");
@@ -182,8 +182,9 @@
         remodal.td = tdModal > tdOverlay ? tdModal : tdOverlay;
         remodal.td = tdBg > remodal.td ? tdBg : remodal.td;
 
-        // 自己加入的提交按钮click
-        remodal.$submitButton.bind('click', function(e) {
+        // 自己加入的注册按钮click
+        // remodal.$submitButton.bind('click', function(e) {
+        remodal.$modal.bind('submit', function(e) {
             e.preventDefault();
             $.ajax({
                     url: 'user/userRegister',
@@ -192,8 +193,9 @@
                     contentType:'application/json;charset=UTF-8',
                     data: JSON.stringify($('#register').serializeObject()),
                     success: function(data, textStatus, xhr) {
-                            console.log(data);
-                            $('#login_info').css('display', 'block');;
+                            console.log("注册成功");
+                            window.login_state = "true";
+                            $('#login_info').css('display', 'block');
                             $('#reg_log_btn').css('display', 'none');
                         }
                     });
@@ -203,31 +205,44 @@
         // 自己加入的登录按钮click
         remodal.$loginButton.bind('click', function(e) {
             e.preventDefault();
-            $.ajax({
-                    url: 'user/userLogin',
-                    type: 'POST',
-                    dataType: 'json',
-                    contentType:'application/json;charset=UTF-8',
-                    data: JSON.stringify($('#login').serializeObject()),
-                    success: function(data, textStatus, xhr) {
-                        console.log(data);
-                        if(data.msg == 'success') {
-                            //登录成功
-                            $('#reg_log_btn').css('display', 'none');
-                            $('#login_info').css('display', 'block');
-                            $('#login_info span').html(data.loginUser.username);
-                            remodal.close();
-                        }
-                        if(data.msg == 'userNotExist') {
-                            //用户名不存在
-                            $('#username_error').css('visibility', 'visible');
-                        }
-                        if(data.msg == 'NotMatch') {
-                            //密码不正确
-                            $('#pwd_error').css('visibility', 'visible');
-                        }
-                    }
-                });
+            if($(":input[name='username']").val() == ''){
+            	$('#username_error').html("用户名不要空着呀");
+                $('#username_error').css('visibility', 'visible');
+                return false;
+            }
+            else if($(":input[type='password']").val() == ''){
+            	$('#pwd_error').html("密码不要空着呀");
+                $('#pwd_error').css('visibility', 'visible');
+            }else
+	            $.ajax({
+	                    url: 'user/userLogin',
+	                    type: 'POST',
+	                    dataType: 'json',
+	                    contentType:'application/json;charset=UTF-8',
+	                    data: JSON.stringify($('#login').serializeObject()),
+	                    success: function(data, textStatus, xhr) {
+	                        console.log(data);
+	                        if(data.msg == 'success') {
+	                            //登录成功
+	                            $('#reg_log_btn').css('display', 'none');
+	                            $('#login_info').css('display', 'block');
+	                            $('#login_info span').html(data.loginUser.username);
+                                window.login_state = "true";
+                                console.log(window.login_state);
+	                            remodal.close();
+	                        }
+	                        if(data.msg == 'userNotExist') {
+	                            //用户名不存在
+	                            $('#username_error').html("这个用户名好像还没注册呢");
+	                            $('#username_error').css('visibility', 'visible');
+	                        }
+	                        if(data.msg == 'NotMatch') {
+	                            //密码不正确
+	                            $('#pwd_error').html("密码好像记错了吧")
+	                            $('#pwd_error').css('visibility', 'visible');
+	                        }
+	                    }
+	                });
         });
 
         // Add close button event listener

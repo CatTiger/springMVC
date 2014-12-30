@@ -148,6 +148,18 @@ a.rigister span{
 .login_info a:before {
 	content:"\f0f0";
 }
+#login_info {
+    width: 12em;
+}
+#login_info > img {
+    float: left;
+    margin-right: 1em;
+    width: 3.5em;
+}
+#login_info li {
+    float: left;
+    margin: 0.2em 0.5em 0;
+}
 /*.top-contact-info ul li a:hover{
 	text-decoration:none;
 	color:#EF3626;
@@ -401,6 +413,7 @@ nav a:hover{
 	margin-left: 0.2em;
 	border-radius:
 }
+
 /*--//top-header---*/
 /*----slider----*/
 /*出问题找*/

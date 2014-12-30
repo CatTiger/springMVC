@@ -48,12 +48,12 @@
 								<div class="clearfix"> </div>
 							</ul> -->
 							<div id="login_info" style="display:block">
-								<img src="" alt="">
+								<img src="./resources/images/kid-r-img.jpg" alt="">
 								<div>欢迎：<span>${loginUser.username}</span></div>
 								<ul>
 									<li><a href=""><i class="icon-user icon-large"></i></a></li>
 									<li><a href=""><i class="icon-star icon-large"></i></a></li>
-									<li><a id="logout" href="user/userLogout"><i class="icon-remove icon-large"></i></a></li>
+									<li><a id="logout" href="userLogout"><i class="icon-remove icon-large"></i></a></li>
 								</ul>
 							</div>
 						</div>
@@ -127,6 +127,7 @@
 						<div class="clearfix"> </div>
 			</div>
 		</div>
+		<div class="fill_black" style="display:none"></div>
 		<!-- 主展示区 -->
 		<div class="container">
 			<!-- 头像和nav -->

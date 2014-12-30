@@ -2,29 +2,33 @@ package com.team4.platform.view;
 
 import java.util.Date;
 
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Scope;
+
+
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
+
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.servlet.ModelAndView;
+
+
 
 import com.team4.base.core.exception.AppException;
 import com.team4.platform.model.BaseUser;
 import com.team4.platform.service.IUserService;
-import com.team4.platform.service.impl.UserServiceImpl;
+
 
 /**
  * @author chenzhq
@@ -69,11 +73,13 @@ public class UserController {
 	 * 验证用户名是否已被注册
 	 * @param username
 	 * @return
+	 * @throws JSONException 
 	 */
 	
 	@RequestMapping(value="/checkname",method = RequestMethod.POST)
-	public @ResponseBody String checkName(@RequestBody String username) {
-		return userService.getUserByUserName(username) == null ?  "notExist": "exist" ;
+	public @ResponseBody String checkName(HttpServletRequest username) throws JSONException {
+		JSONObject json = new JSONObject();
+		return userService.getUserByUserName(username.getParameter("param")) == null ?  json.put("info", "可以注册").put("status", "y").toString() : json.put("info", "已被注册").put("status", "n").toString();
 	}
 	
 	/**
@@ -120,8 +126,7 @@ public class UserController {
 	
 	@RequestMapping(value="/userInfo")
 	public String userInfo(HttpSession session) {
-		System.out.println("跳转");
-		System.out.println(session.getAttribute("loginUser"));
+		System.out.println("跳转" + session.getAttribute("loginUser"));
 		return "user/userInfo";
 	}
 }
